@@ -1,0 +1,140 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:124), pid=61216, tid=57388
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version:  (8.0_11-b12) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.11-b03 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000000248e800):  JavaThread "Unknown thread" [_thread_in_vm, id=57388, stack(0x0000000002ec0000,0x0000000002fc0000)]
+
+Stack: [0x0000000002ec0000,0x0000000002fc0000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x308eca]
+V  [jvm.dll+0x25e121]
+V  [jvm.dll+0x25ed33]
+V  [jvm.dll+0x256686]
+V  [jvm.dll+0x5d4cc]
+V  [jvm.dll+0x5d5c3]
+V  [jvm.dll+0x71efa]
+V  [jvm.dll+0x72258]
+V  [jvm.dll+0xe1927]
+V  [jvm.dll+0xe1cb6]
+V  [jvm.dll+0x1f1407]
+V  [jvm.dll+0x2229b4]
+V  [jvm.dll+0x14a151]
+C  [javaw.exe+0x208a]
+C  [javaw.exe+0xc9fb]
+C  [javaw.exe+0xca8f]
+C  [kernel32.dll+0x1652d]
+C  [ntdll.dll+0x2c541]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x000000000248e800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=57388, stack(0x0000000002ec0000,0x0000000002fc0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.015 loading class java/lang/CharSequence done
+Event: 0.015 loading class java/lang/String done
+Event: 0.015 loading class java/lang/Class
+Event: 0.015 loading class java/lang/reflect/AnnotatedElement
+Event: 0.015 loading class java/lang/reflect/AnnotatedElement done
+Event: 0.015 loading class java/lang/reflect/GenericDeclaration
+Event: 0.015 loading class java/lang/reflect/GenericDeclaration done
+Event: 0.015 loading class java/lang/reflect/Type
+Event: 0.015 loading class java/lang/reflect/Type done
+Event: 0.016 loading class java/lang/Class done
+
+
+Dynamic libraries:
+0x000000013f950000 - 0x000000013f984000 	C:\Program Files\Java\jre8\bin\javaw.exe
+0x0000000077890000 - 0x0000000077a39000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077670000 - 0x000000007778f000 	C:\Windows\system32\kernel32.dll
+0x000007fefd790000 - 0x000007fefd7fb000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fefdb10000 - 0x000007fefdbeb000 	C:\Windows\system32\ADVAPI32.dll
+0x000007feffb00000 - 0x000007feffb9f000 	C:\Windows\system32\msvcrt.dll
+0x000007fefdaf0000 - 0x000007fefdb0f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007feff570000 - 0x000007feff69d000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077790000 - 0x000000007788a000 	C:\Windows\system32\USER32.dll
+0x000007feff410000 - 0x000007feff477000 	C:\Windows\system32\GDI32.dll
+0x000007feff490000 - 0x000007feff49e000 	C:\Windows\system32\LPK.dll
+0x000007feff4a0000 - 0x000007feff569000 	C:\Windows\system32\USP10.dll
+0x000007fefc250000 - 0x000007fefc444000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007fefda70000 - 0x000007fefdae1000 	C:\Windows\system32\SHLWAPI.dll
+0x000007feff380000 - 0x000007feff3ae000 	C:\Windows\system32\IMM32.DLL
+0x000007feff740000 - 0x000007feff849000 	C:\Windows\system32\MSCTF.dll
+0x000007fefd600000 - 0x000007fefd631000 	C:\Windows\system32\nvinitx.dll
+0x000000000f000000 - 0x000000000f006000 	C:\Program Files\NVIDIA Corporation\CoProcManager\detoured.dll
+0x000007fefa7f0000 - 0x000007fefa81d000 	C:\Program Files\NVIDIA Corporation\CoProcManager\nvd3d9wrapx.dll
+0x000007fefef60000 - 0x000007feff137000 	C:\Windows\system32\SETUPAPI.dll
+0x000007fefd800000 - 0x000007fefd836000 	C:\Windows\system32\CFGMGR32.dll
+0x000007fefdf40000 - 0x000007fefe017000 	C:\Windows\system32\OLEAUT32.dll
+0x000007fefdc90000 - 0x000007fefde93000 	C:\Windows\system32\ole32.dll
+0x000007fefd6f0000 - 0x000007fefd70a000 	C:\Windows\system32\DEVOBJ.dll
+0x000007fefa7c0000 - 0x000007fefa7e2000 	C:\Program Files\NVIDIA Corporation\CoProcManager\nvdxgiwrapx.dll
+0x0000000079040000 - 0x0000000079112000 	C:\Program Files\Java\jre8\bin\msvcr100.dll
+0x0000000002590000 - 0x0000000002dba000 	C:\Program Files\Java\jre8\bin\server\jvm.dll
+0x000007fef6e70000 - 0x000007fef6e79000 	C:\Windows\system32\WSOCK32.dll
+0x000007fefe020000 - 0x000007fefe06d000 	C:\Windows\system32\WS2_32.dll
+0x000007feff480000 - 0x000007feff488000 	C:\Windows\system32\NSI.dll
+0x000007fefb160000 - 0x000007fefb19b000 	C:\Windows\system32\WINMM.dll
+0x0000000077a60000 - 0x0000000077a67000 	C:\Windows\system32\PSAPI.DLL
+0x000000006a3a0000 - 0x000000006a3af000 	C:\Program Files\Java\jre8\bin\verify.dll
+0x000000006cfc0000 - 0x000000006cfe8000 	C:\Program Files\Java\jre8\bin\java.dll
+0x0000000059300000 - 0x0000000059316000 	C:\Program Files\Java\jre8\bin\zip.dll
+0x000007fef63c0000 - 0x000007fef64e5000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1251 -Xbootclasspath:D:\AndroidSDK\platforms\android-22\android.jar 
+java_command: com.badlogic.gdx.physics.box2d.utils.Box2DBuild
+java_class_path (initial): D:\LibGDXProjects\android\bin\classes;C:\Users\RamonN\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.5.5\16bbdb750c6e557693820bbcd31dd992c0f6839f\gdx-backend-android-1.5.5.jar;C:\Users\RamonN\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.5.5\8931a097fc80279c6b9ee695560a85c1e280c7ea\gdx-box2d-1.5.5.jar;C:\Users\RamonN\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.5.5\9896d723afaeaae8229546119f9abffac5f8dbc7\gdx-1.5.5.jar;D:\LibGDXProjects\core\bin
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_25
+PATH=C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter\Driver;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\
+USERNAME=RamonN
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 60 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, ht, tsc, tscinvbit
+
+Memory: 4k page, physical 3940000k(291312k free), swap 9651220k(1996780k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.11-b03) for windows-amd64 JRE (1.8.0_11-b12), built on Jun 16 2014 20:57:32 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Sun Apr 05 18:11:07 2015
+elapsed time: 0 seconds
+
