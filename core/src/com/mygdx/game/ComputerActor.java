@@ -15,7 +15,7 @@ public class ComputerActor extends Actor {
 	private Texture texture;
 	private Sprite sprite;
 	
-	public ComputerActor() {
+	public ComputerActor(float x, float y) {
 		if (!connect) {
 			texture = new Texture(Gdx.files.internal("data/network/computer.png"));
 			sprite = new Sprite(texture);
@@ -25,9 +25,13 @@ public class ComputerActor extends Actor {
 			sprite = new Sprite(texture);
 		}
 		
+		sprite.setX(x);
+		sprite.setY(y);
+		this.setX(x);
+		this.setY(y);
 		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
 		sprite.setOriginCenter();
-		System.out.println(sprite.getRotation());
+		//System.out.println(sprite.getRotation());
 		addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

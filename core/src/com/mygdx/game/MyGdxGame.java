@@ -12,11 +12,20 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create() {
 		stage = new Stage();
+		
+		float x = 0;
+		float y = 0;
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 6; j++) {
+		//		ComputerActor item = new ComputerActor(x, y);
+				stage.addActor(new ComputerActor(x, y));
+				x += 64;
+				if (x == (6 * 64))
+					x = 0;
+			}
+			y += 64;
+		}
 		Gdx.input.setInputProcessor(stage);
-		
-		ComputerActor item = new ComputerActor();
-		stage.addActor(item);
-		
 	}
 	
 	@Override
