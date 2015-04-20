@@ -30,7 +30,8 @@ public class GameScreen implements Screen {
 			y += 64;
 		}
 		
-		group.setPosition(0, Gdx.graphics.getHeight());
+		//group.setPosition(0, Gdx.graphics.getHeight());
+		
 		stage.addActor(group);
 	}
 
