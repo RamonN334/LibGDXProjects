@@ -4,25 +4,30 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-//import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class ComputerActor extends Actor {
 	private boolean connect = false;
+	//private TextureRegion textureReg;
 	private Texture texture;
 	private Sprite sprite;
 	
-	public ComputerActor(float x, float y) {
-		if (!connect) {
-			texture = new Texture(Gdx.files.internal("data/network/computer.png"));
-			sprite = new Sprite(texture);
-		}
-		else {
-			texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
-			sprite = new Sprite(texture);
-		}
+	public ComputerActor(float x, float y, TextureRegion textureReg) {
+	//	if (!connect) {
+	//		texture = new Texture(Gdx.files.internal("data/network/computer.png"));
+	//		sprite = new Sprite(texture);
+	//	}
+	//	else {
+	//		texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
+	//		sprite = new Sprite(texture);
+	//	}
+		
+		//texture = new Texture(Gdx.files.internal(namePath));
+		//textureReg = new TextureRegion(texture, x, y, 64, 64);
+		sprite = new Sprite(textureReg);
 		
 		sprite.setX(x);
 		sprite.setY(y);
