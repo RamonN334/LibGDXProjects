@@ -14,8 +14,20 @@ public class ComputerActor extends Actor {
 	//private TextureRegion textureReg;
 	private Texture texture;
 	private Sprite sprite;
+	private boolean top = false;
+	private boolean left = false;
+	private boolean bottom = false;
+	private boolean right = false;
 	
-	public ComputerActor(float x, float y, TextureRegion textureReg) {
+	private void SwapPointsCollision() {
+		boolean swap = right;
+		right = bottom;
+		bottom = left;
+		left = top;
+		top = swap;
+	} 
+	
+	public ComputerActor(float x, float y, String name) {
 	//	if (!connect) {
 	//		texture = new Texture(Gdx.files.internal("data/network/computer.png"));
 	//		sprite = new Sprite(texture);
@@ -26,8 +38,9 @@ public class ComputerActor extends Actor {
 	//	}
 		
 		//texture = new Texture(Gdx.files.internal(namePath));
-		//textureReg = new TextureRegion(texture, x, y, 64, 64);
-		sprite = new Sprite(textureReg);
+		String path = "data/network/" + name + ".png";
+		Texture texture = new Texture(Gdx.files.internal(path));
+		sprite = new Sprite(texture);
 		
 		sprite.setX(x);
 		sprite.setY(y);
@@ -35,16 +48,19 @@ public class ComputerActor extends Actor {
 		this.setY(y);
 		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
 		sprite.setOriginCenter();
+		//switch (name) {
 		addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				sprite.rotate(90);
+				SwapPointsCollision();
 				if (sprite.getRotation() == 360)
 					sprite.setRotation(0);
 				System.out.println(sprite.getRotation());
 				return true;
 			}
 		}); 
+		//}
 	}
 	
 	@Override

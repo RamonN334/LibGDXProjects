@@ -1,5 +1,10 @@
 package com.mygdx.game;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -26,17 +31,35 @@ public class GameScreen implements Screen {
 		float y = 0;
 		//int x1 = 0;
 		int y1 = 384;
-		for (int i = 0; i < ROW; i++) {
-			for (int j = 0; j < COLUMN; j++) {
-				
-				group.addActor(new ComputerActor(x, y, new TextureRegion(textureSheet, (int)x, (int)y1, 64, 64)));
-				x += 64;
-				//x1 += 64;
-				if (x == COLUMN * 64)
-					x = 0;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("E:/LibGDXProjects/android/assets/data/network/LevelOne/LevelOne.txt"));
+			String line;
+			String[] retval;
+			while (true) {
+				for (int i = 0; i < ROW; i++) {
+					line = reader.readLine();
+					if (line != null)
+						retval = line.split(" ");
+					else
+						break;
+					for (int j = 0; j < COLUMN; j++) {
+						/*new TextureRegion(textureSheet, (int)x, (int)y1, 64, 64))*/
+						
+						group.addActor(new ComputerActor(x, y, retval[j]));
+						x += 64;
+						//x1 += 64;
+						if (x == COLUMN * 64)
+							x = 0;
+					}
+					y += 64;
+					y1 -= 64;
+				}
+				break;
 			}
-			y += 64;
-			y1 -= 64;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		//group.setPosition(0, Gdx.graphics.getHeight());
