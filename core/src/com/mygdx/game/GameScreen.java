@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,6 +18,7 @@ public class GameScreen implements Screen {
 	private Stage stage;
 	private Group group;
 	private Texture textureSheet;
+	private TextureAtlas texAt;
 	private final int ROW = 7;
 	private final int COLUMN = 6;
 	
@@ -32,7 +34,7 @@ public class GameScreen implements Screen {
 		//int x1 = 0;
 		int y1 = 384;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("E:/LibGDXProjects/android/assets/data/network/LevelOne/LevelOne.txt"));
+			BufferedReader reader = new BufferedReader(Gdx.files.internal("data/network/LevelOne/LevelOne.txt").reader());
 			String line;
 			String[] retval;
 			while (true) {
@@ -62,7 +64,8 @@ public class GameScreen implements Screen {
 			e.printStackTrace();
 		}
 		
-		//group.setPosition(0, Gdx.graphics.getHeight());
+		group.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), Gdx.graphics.getHeight() / 2);
+		group.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
 		stage.addActor(group);
 	}
@@ -108,7 +111,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		stage.dispose();
 	}
 
 }

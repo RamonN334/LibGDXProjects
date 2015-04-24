@@ -13,7 +13,6 @@ public class ButtonActor extends Actor {
 		sprite = new Sprite(new Texture(Gdx.files.internal(pathName)));
 		this.setPosition((Gdx.graphics.getWidth() / 2) - (sprite.getWidth() / 2), Gdx.graphics.getHeight() / 2);
 		this.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		//setPosition((Gdx.graphics.getWidth() / 2) - (this.getWidth() / 2), Gdx.graphics.getHeight() / 2);
 		sprite.setX(this.getX());
 		sprite.setY(this.getY());
 		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
