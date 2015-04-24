@@ -2,37 +2,30 @@ package com.mygdx.game;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameScreen implements Screen {
 	private Stage stage;
 	private Group group;
-	private Texture textureSheet;
-	private TextureAtlas texAt;
 	private final int ROW = 7;
 	private final int COLUMN = 6;
+	private ComputerActor [][] arrayActors;
 	
 	public GameScreen(String namePath) {
 		stage = new Stage();
 		group = new Group();
-		textureSheet = new Texture(Gdx.files.internal(namePath));
+		arrayActors = new ComputerActor[ROW][COLUMN];
 		
 		group.setSize(COLUMN * 64, ROW * 64);
 		
 		float x = 0;
 		float y = 0;
-		//int x1 = 0;
-		int y1 = 384;
 		try {
 			BufferedReader reader = new BufferedReader(Gdx.files.internal("data/network/LevelOne/LevelOne.txt").reader());
 			String line;
@@ -44,9 +37,7 @@ public class GameScreen implements Screen {
 						retval = line.split(" ");
 					else
 						break;
-					for (int j = 0; j < COLUMN; j++) {
-						/*new TextureRegion(textureSheet, (int)x, (int)y1, 64, 64))*/
-						
+					for (int j = 0; j < COLUMN; j++) {						
 						group.addActor(new ComputerActor(x, y, retval[j]));
 						x += 64;
 						//x1 += 64;
@@ -54,7 +45,6 @@ public class GameScreen implements Screen {
 							x = 0;
 					}
 					y += 64;
-					y1 -= 64;
 				}
 				break;
 			}
@@ -64,7 +54,7 @@ public class GameScreen implements Screen {
 			e.printStackTrace();
 		}
 		
-		group.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), Gdx.graphics.getHeight() / 2);
+		group.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
 		group.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
 		stage.addActor(group);

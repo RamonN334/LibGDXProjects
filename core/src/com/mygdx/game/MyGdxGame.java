@@ -4,7 +4,9 @@ import com.badlogic.gdx.Game;
 
 public class MyGdxGame extends Game {
 	private MenuScreen menuScreen;
-	private GameScreen gameScreen;
+	private GameScreen gameLevelOne;
+	private GameScreen gameLevelTwo;
+	private GameScreen gameLevelThree;
 	
 	private static MyGdxGame instance = new MyGdxGame();
 	
@@ -19,13 +21,13 @@ public class MyGdxGame extends Game {
 	}
 	
 	public void ShowGame() {
-		setScreen(gameScreen);
+		setScreen(gameLevelOne);
 	}
 	
 	@Override
 	public void create() {
 		menuScreen = new MenuScreen();
-		gameScreen = new GameScreen("data/network/LevelOne/sheetLevel1.png");
+		gameLevelOne = new GameScreen("data/network/LevelOne/sheetLevel1.png");
 
 		ShowGameMenu();
 	}
@@ -33,6 +35,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose() {
 		menuScreen.dispose();
-		gameScreen.dispose();
+		gameLevelOne.dispose();
 	}
 }
