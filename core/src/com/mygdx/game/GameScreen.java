@@ -15,12 +15,13 @@ public class GameScreen implements Screen {
 	private Group group;
 	private final int ROW = 7;
 	private final int COLUMN = 6;
-	private ComputerActor [][] arrayActors;
+	private MatrixActor matAct;
+	
 	
 	public GameScreen(String namePath) {
 		stage = new Stage();
 		group = new Group();
-		arrayActors = new ComputerActor[ROW][COLUMN];
+		matAct = new MatrixActor();
 		
 		group.setSize(COLUMN * 64, ROW * 64);
 		
@@ -38,9 +39,8 @@ public class GameScreen implements Screen {
 					else
 						break;
 					for (int j = 0; j < COLUMN; j++) {						
-						group.addActor(new ComputerActor(x, y, retval[j]));
+						matAct.addActor(i, j, new ComputerActor(x, y, retval[j]));
 						x += 64;
-						//x1 += 64;
 						if (x == COLUMN * 64)
 							x = 0;
 					}
@@ -54,10 +54,10 @@ public class GameScreen implements Screen {
 			e.printStackTrace();
 		}
 		
-		group.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
-		group.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
+		matAct.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
+		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
-		stage.addActor(group);
+		stage.addActor(matAct);
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		
 		stage.act(delta);
+		matAct.checkConnections();
 		stage.draw();		
 	}
 

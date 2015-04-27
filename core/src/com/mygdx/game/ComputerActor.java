@@ -18,6 +18,7 @@ public class ComputerActor extends Actor {
 	private boolean left = false;
 	private boolean bottom = false;
 	private boolean right = false;
+	private String type;
 	
 	private void SwapPointsCollision() {
 		boolean swap = right;
@@ -34,8 +35,38 @@ public class ComputerActor extends Actor {
 		System.out.println(right);
 	}
 	
+	
+	public boolean getBoolTop() {
+		return top;
+	}
+	public boolean getBoolLeft() {
+		return left;
+	}
+	public boolean getBoolBottom() {
+		return bottom;
+	}
+	public boolean getBoolRight() {
+		return right;
+	}
+	
 	public void SetActive() {
 		connect = true;
+		if (type.equals("computer"))
+			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computerActive.png")));
+	}
+	
+	public void SetUnActive() {
+		connect = false;
+		if (type.equals("computer"))
+			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computer.png")));
+	}
+	
+	public boolean GetActive() {
+		return connect;
+	}
+	
+	public String getType() {
+		return type;
 	}
 	
 	public ComputerActor(float x, float y, String name) {
@@ -47,6 +78,9 @@ public class ComputerActor extends Actor {
 	//		texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
 	//		sprite = new Sprite(texture);
 	//	}
+		type = new String(name);
+		if (type.equals("server"))
+			connect = true;
 		
 		String path = "data/network/" + name + ".png";
 		Texture texture = new Texture(Gdx.files.internal(path));
