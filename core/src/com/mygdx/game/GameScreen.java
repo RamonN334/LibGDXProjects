@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
 					else
 						break;
 					for (int j = 0; j < COLUMN; j++) {						
-						matAct.addActor(i, j, new ComputerActor(x, y, retval[j]));
+						matAct.addActor(i, j, new ComputerActor(i, j, x, y, retval[j]));
 						x += 64;
 						if (x == COLUMN * 64)
 							x = 0;
@@ -58,9 +58,7 @@ public class GameScreen implements Screen {
 		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
 		matAct.Initilize();
-		matAct.Initilize();
-		matAct.Initilize();
-		matAct.Initilize();
+		//matAct.updateConnection();
 		stage.addActor(matAct);
 	}
 

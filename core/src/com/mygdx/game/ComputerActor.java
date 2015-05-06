@@ -14,10 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class ComputerActor extends Actor {
 	private boolean connect = false;
 	private Sprite sprite;
+	private int xindex;
+	private int yindex;
 	private boolean top = false;
 	private boolean left = false;
 	private boolean bottom = false;
 	private boolean right = false;
+	private boolean isRotated = false;
 	
 	private ComputerActor CellU;
 	private ComputerActor CellL;
@@ -26,6 +29,49 @@ public class ComputerActor extends Actor {
 	
 	private String type;
 	private String side;
+	
+	enum Dir {
+//		NONE(0), 
+		U___, _R__, __D_, ___L;
+		static final Dir[] sides = { U___, _R__, __D_, ___L };
+		Dir reverse = null;
+		static {
+			U___.reverse = __D_;
+			_R__.reverse = ___L;
+			__D_.reverse = U___;
+			___L.reverse = _R__;
+		};
+	};
+	
+	ComputerActor next(Dir d) {
+		switch (d) {
+		case U___:
+			return CellU;
+		case _R__:
+			return CellR;
+		case __D_:
+			return CellD;
+		case ___L:
+			return CellL;
+		default:
+			throw new RuntimeException("Method ComputerActor.next() got bad argument Dir d");	
+		}
+	}
+	
+	public boolean getSide(Dir d) {
+		switch (d) {
+		case U___:
+			return getU();
+		case _R__:
+			return getR();
+		case __D_:
+			return getD();
+		case ___L:
+			return getL();
+		default:
+			throw new RuntimeException("Method ComputerActor.getSide() got bad argument Dir d");
+		}
+	}
 	
 	public void setNeighbours(ComputerActor u, ComputerActor l, ComputerActor d, ComputerActor r) {
 		CellU = u;
@@ -44,6 +90,14 @@ public class ComputerActor extends Actor {
 		else return "error";
 	}
 	
+	public void setRotate() {
+		isRotated = false;
+	}
+	
+	public boolean getRotate() {
+		return isRotated;
+	}
+	
 	private void SwapPointsCollision() {
 		boolean swap = right;
 		right = bottom;
@@ -60,32 +114,35 @@ public class ComputerActor extends Actor {
 	}
 	
 	
-	public boolean getBoolTop() {
+	public boolean getU() {
 		return top;
 	}
-	public boolean getBoolLeft() {
+	public boolean getL() {
 		return left;
 	}
-	public boolean getBoolBottom() {
+	public boolean getD() {
 		return bottom;
 	}
-	public boolean getBoolRight() {
+	public boolean getR() {
 		return right;
 	}
 	
-	public void SetActive() {
-		connect = true;
+	public void setActive(boolean b) {
+		if (connect == b || type.equals("server")) return;
+		else connect = b;
 		if (type.equals("computer"))
 			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computerActive.png")));
 	}
 	
 	public void SetUnActive() {
-		connect = false;
+		if (!type.equals("server")) {
+			connect = false;
+		}
 		if (type.equals("computer"))
 			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computer.png")));
 	}
 	
-	public boolean GetActive() {
+	public boolean getActive() {
 		return connect;
 	}
 	
@@ -93,7 +150,15 @@ public class ComputerActor extends Actor {
 		return type;
 	}
 	
-	public ComputerActor(float x, float y, String name) {
+	public int x() {
+		return xindex;
+	}
+	
+	public int y() {
+		return yindex;
+	}
+	
+	public ComputerActor(int iindex, int jindex, float x, float y, String name) {
 	//	if (!connect) {
 	//		texture = new Texture(Gdx.files.internal("data/network/computer.png"));
 	//		sprite = new Sprite(texture);
@@ -102,6 +167,8 @@ public class ComputerActor extends Actor {
 	//		texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
 	//		sprite = new Sprite(texture);
 	//	}
+		xindex = iindex;
+		yindex = jindex;
 		side = new String("error");
 		type = new String(name);
 		if (type.equals("server"))
@@ -123,8 +190,8 @@ public class ComputerActor extends Actor {
 				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 					sprite.rotate(90);
 					SwapPointsCollision();
-					SetUnActive();
-					setSide("error");
+					connect = false;
+					isRotated = true;
 					//PrintPoints();
 					if (sprite.getRotation() == 360)
 						sprite.setRotation(0);
