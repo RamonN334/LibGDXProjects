@@ -28,10 +28,8 @@ public class ComputerActor extends Actor {
 	private ComputerActor CellR;
 	
 	private String type;
-	private String side;
 	
 	enum Dir {
-//		NONE(0), 
 		U___, _R__, __D_, ___L;
 		static final Dir[] sides = { U___, _R__, __D_, ___L };
 		Dir reverse = null;
@@ -80,16 +78,6 @@ public class ComputerActor extends Actor {
 		CellR = r;
 	}
 	
-	public void setSide(String sideConnect) {
-		side = sideConnect;
-	}
-	
-	public String getSide() {
-		if (side != null)
-			return side;
-		else return "error";
-	}
-	
 	public void setRotate() {
 		isRotated = false;
 	}
@@ -105,15 +93,7 @@ public class ComputerActor extends Actor {
 		left = top;
 		top = swap;
 	} 
-	
-	private void PrintPoints() {
-		System.out.println(top);
-		System.out.println(left);
-		System.out.println(bottom);
-		System.out.println(right);
-	}
-	
-	
+		
 	public boolean getU() {
 		return top;
 	}
@@ -159,17 +139,8 @@ public class ComputerActor extends Actor {
 	}
 	
 	public ComputerActor(int iindex, int jindex, float x, float y, String name) {
-	//	if (!connect) {
-	//		texture = new Texture(Gdx.files.internal("data/network/computer.png"));
-	//		sprite = new Sprite(texture);
-	//	}
-	//	else {
-	//		texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
-	//		sprite = new Sprite(texture);
-	//	}
 		xindex = iindex;
 		yindex = jindex;
-		side = new String("error");
 		type = new String(name);
 		if (type.equals("server"))
 			connect = true;
@@ -192,10 +163,8 @@ public class ComputerActor extends Actor {
 					SwapPointsCollision();
 					connect = false;
 					isRotated = true;
-					//PrintPoints();
 					if (sprite.getRotation() == 360)
 						sprite.setRotation(0);
-					//System.out.println(sprite.getRotation());
 					return true;
 				}
 			}); 
@@ -230,6 +199,10 @@ public class ComputerActor extends Actor {
 			bottom = true;
 			right = true;
 		}
+	}
+	
+	public void changeSize() {
+		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
 	}
 	
 	@Override

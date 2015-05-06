@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 		float x = 0;
 		float y = 0;
 		try {
-			BufferedReader reader = new BufferedReader(Gdx.files.internal("data/network/LevelOne/LevelOne.txt").reader());
+			BufferedReader reader = new BufferedReader(Gdx.files.internal(namePath).reader());
 			String line;
 			String[] retval;
 			while (true) {
@@ -58,7 +58,6 @@ public class GameScreen implements Screen {
 		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
 		matAct.Initilize();
-		//matAct.updateConnection();
 		stage.addActor(matAct);
 	}
 
@@ -80,7 +79,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		
 	}
 
 	@Override

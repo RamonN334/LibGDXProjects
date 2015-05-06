@@ -27,7 +27,9 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create() {
 		menuScreen = new MenuScreen();
-		gameLevelOne = new GameScreen("data/network/LevelOne/sheetLevel1.png");
+		gameLevelOne = new GameScreen("data/network/Levels/LevelOne.txt");
+		gameLevelTwo = new GameScreen("data/network/Levels/LevelTwo.txt");
+		
 
 		ShowGameMenu();
 	}
