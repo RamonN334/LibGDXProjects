@@ -18,7 +18,31 @@ public class ComputerActor extends Actor {
 	private boolean left = false;
 	private boolean bottom = false;
 	private boolean right = false;
+	
+	private ComputerActor CellU;
+	private ComputerActor CellL;
+	private ComputerActor CellD;
+	private ComputerActor CellR;
+	
 	private String type;
+	private String side;
+	
+	public void setNeighbours(ComputerActor u, ComputerActor l, ComputerActor d, ComputerActor r) {
+		CellU = u;
+		CellL = l;
+		CellD = d;
+		CellR = r;
+	}
+	
+	public void setSide(String sideConnect) {
+		side = sideConnect;
+	}
+	
+	public String getSide() {
+		if (side != null)
+			return side;
+		else return "error";
+	}
 	
 	private void SwapPointsCollision() {
 		boolean swap = right;
@@ -78,6 +102,7 @@ public class ComputerActor extends Actor {
 	//		texture = new Texture(Gdx.files.internal("data/network/computerActive.png"));
 	//		sprite = new Sprite(texture);
 	//	}
+		side = new String("error");
 		type = new String(name);
 		if (type.equals("server"))
 			connect = true;
@@ -98,6 +123,8 @@ public class ComputerActor extends Actor {
 				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 					sprite.rotate(90);
 					SwapPointsCollision();
+					SetUnActive();
+					setSide("error");
 					//PrintPoints();
 					if (sprite.getRotation() == 360)
 						sprite.setRotation(0);

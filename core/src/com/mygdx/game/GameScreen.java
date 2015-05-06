@@ -57,6 +57,10 @@ public class GameScreen implements Screen {
 		matAct.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
 		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
+		matAct.Initilize();
+		matAct.Initilize();
+		matAct.Initilize();
+		matAct.Initilize();
 		stage.addActor(matAct);
 	}
 
