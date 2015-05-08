@@ -8,37 +8,30 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 public class MatrixActor extends Group {
 	private final int ROW = 7;
 	private final int COLUMN = 6;
-	private ComputerActor server;
-	private LinkedList<ComputerActor> connectedCells;
+	private CellActor server;
+	private LinkedList<CellActor> connectedCells;
 	private boolean [][] isConnected;
-	private Vector<ComputerActor> computers;
+	private Vector<CellActor> elements;
 	
-	private ComputerActor [][] matrix;
+	private CellActor [][] matrix;
 	
 	public MatrixActor() {
-		matrix = new ComputerActor[ROW][COLUMN];
-		connectedCells = new LinkedList<ComputerActor>();
-		isConnected = new boolean[ROW][COLUMN];
-		computers = new Vector<ComputerActor>();
+		matrix = new CellActor[ROW][COLUMN];
+		elements = new Vector<CellActor>();
+		connectedCells = new LinkedList<CellActor>();
 	}
 	
 	// добавление актера в матрицу
-	public void addActor(int row, int column, ComputerActor obj) {
+	public void addActor(int row, int column, CellActor obj) {
 		if (row < ROW && column < COLUMN) {
 			matrix[row][column] = obj;
 			addActor(obj);
-			if (obj.getType().equals("server")) {
-				connectedCells.add(obj);
-				server = obj;
-			}
-			
-			if (obj.getType().equals("computer"))
-				computers.add(obj);
+			elements.add(obj);
 		}
 	}
 	
 	// получение элемента
-	public ComputerActor getActor(int row, int column) {
+	public CellActor getActor(int row, int column) {
 		if (row < ROW && column < COLUMN)
 			return matrix[row][column];
 		else
@@ -47,7 +40,7 @@ public class MatrixActor extends Group {
 	
 	// устанвливаем соседей и обновляем состояния элементов
 	public void Initilize() {
-		ComputerActor u, l, d, r;
+		CellActor u, l, d, r;
 		for (int i = 0; i < ROW; i++) {
 			for (int j = 0; j < COLUMN; j++) {
 				u = l = d = r = null;
@@ -81,9 +74,9 @@ public class MatrixActor extends Group {
 		connectedCells.add(server);
 		
 		while (!connectedCells.isEmpty()) {
-			ComputerActor item = connectedCells.remove();
+			CellActor item = connectedCells.remove();
 			
-			for (ComputerActor.Dir d : ComputerActor.Dir.sides) {
+			for (CellActor.Dir d : CellActor.Dir.sides) {
 				if (hasNewConnection(item, d, isConnected))
 					connectedCells.add(item.next(d));
 			}
@@ -96,9 +89,9 @@ public class MatrixActor extends Group {
 	}
 	
 	// если соединение есть
-	public boolean hasNewConnection(ComputerActor item, ComputerActor.Dir d, boolean got[][]) {
-		ComputerActor other = item.next(d);
-		ComputerActor.Dir otherDir = d.reverse;
+	public boolean hasNewConnection(CellActor item, CellActor.Dir d, boolean got[][]) {
+		CellActor other = item.next(d);
+		CellActor.Dir otherDir = d.reverse;
 		
 		if (other == null || got[other.x()][other.y()])
 			return false;
@@ -120,7 +113,7 @@ public class MatrixActor extends Group {
 				}
 			}
 		}
-		for (ComputerActor it : computers) {
+		for (CellActor it : elements) {
 			if (it.getActive())
 				continue;
 			else return false;

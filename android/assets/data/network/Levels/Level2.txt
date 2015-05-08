@@ -1,7 +1,0 @@
-computer cable cableLeft cableLeft cableTriod cableTriod
-cableLeft cableTriod cableLeft cableFour server cableLeft
-cableLeft cable cableTriod cableLeft cableLeft cableLeft
-cable cableLeft cable cableTriod cableLeft computer
-cableLeft cableTriod cableLeft cable cableLeft cableTriod
-cableLeft cableTriod computer cableFour cable cableLeft
-computer cableLeft cable cableLeft cableTriod cable

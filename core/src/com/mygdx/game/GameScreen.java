@@ -45,7 +45,7 @@ public class GameScreen implements Screen {
 					else
 						break;
 					for (int j = 0; j < COLUMN; j++) {						
-						matAct.addActor(i, j, new ComputerActor(i, j, x, y, retval[j]));
+						matAct.addActor(i, j, new CellActor(i, j, x, y, retval[j]));
 						x += 64;
 						if (x == COLUMN * 64)
 							x = 0;
