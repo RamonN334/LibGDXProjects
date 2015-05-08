@@ -9,24 +9,30 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class GameScreen implements Screen {
+	boolean result;
+	int numLevel;
 	private Stage stage;
 	private Group group;
-	private final int ROW = 7;
-	private final int COLUMN = 6;
+	private final int ROW = 7; // количество строк
+	private final int COLUMN = 6; // количество столбцов
 	private MatrixActor matAct;
 	
 	
-	public GameScreen(String namePath) {
+	public GameScreen(String namePath, int level) {
 		stage = new Stage();
 		group = new Group();
 		matAct = new MatrixActor();
+		numLevel = level;
 		
 		group.setSize(COLUMN * 64, ROW * 64);
 		
 		float x = 0;
 		float y = 0;
+		
+		// заполняем матрицу элементов из txt документа
 		try {
 			BufferedReader reader = new BufferedReader(Gdx.files.internal(namePath).reader());
 			String line;
@@ -65,6 +71,13 @@ public class GameScreen implements Screen {
 	public void show() {
 		Gdx.input.setInputProcessor(stage);
 		
+		// устанавливаем Action для плавного перехода на другой экран
+		stage.addAction(Actions.sequence(Actions.alpha(0),Actions.fadeIn(0.5f),Actions.delay(2),Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                MyGdxGame.getInstance().ShowVictoryScreen(numLevel + 1);
+            }
+        })));
 	}
 
 	@Override
@@ -72,9 +85,12 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		
-		stage.act(delta);
-		matAct.checkConnections();
+		result = matAct.checkConnections();
 		stage.draw();		
+		
+		if (result) {
+			stage.act(delta);
+		}
 	}
 
 	@Override

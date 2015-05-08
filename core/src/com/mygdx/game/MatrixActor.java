@@ -22,6 +22,7 @@ public class MatrixActor extends Group {
 		computers = new Vector<ComputerActor>();
 	}
 	
+	// добавление актера в матрицу
 	public void addActor(int row, int column, ComputerActor obj) {
 		if (row < ROW && column < COLUMN) {
 			matrix[row][column] = obj;
@@ -36,6 +37,7 @@ public class MatrixActor extends Group {
 		}
 	}
 	
+	// получение элемента
 	public ComputerActor getActor(int row, int column) {
 		if (row < ROW && column < COLUMN)
 			return matrix[row][column];
@@ -43,6 +45,7 @@ public class MatrixActor extends Group {
 			return null;
 	}
 	
+	// устанвливаем соседей и обновл€ем состо€ни€ элементов
 	public void Initilize() {
 		ComputerActor u, l, d, r;
 		for (int i = 0; i < ROW; i++) {
@@ -65,6 +68,7 @@ public class MatrixActor extends Group {
 		updateConnection();
 	}
 	
+	// ищем соединени€ элементов
 	public void updateConnection() {
 		for (int i = 0; i < ROW; i++)
 			for (int j = 0; j < COLUMN; j++) {
@@ -89,10 +93,9 @@ public class MatrixActor extends Group {
 			for (int j = 0; j < COLUMN; j++)
 				matrix[i][j].setActive(isConnected[i][j]);
 		
-		
-		
 	}
 	
+	// если соединение есть
 	public boolean hasNewConnection(ComputerActor item, ComputerActor.Dir d, boolean got[][]) {
 		ComputerActor other = item.next(d);
 		ComputerActor.Dir otherDir = d.reverse;
@@ -107,7 +110,8 @@ public class MatrixActor extends Group {
 		return true;
 	}
 	
-	public void checkConnections() {
+	// провер€ем, если какой-либо элемент повернулс€, то заново провер€ем все соедени€
+	public boolean checkConnections() {
 		for (int i = 0; i < ROW; i++) {
 			for (int j = 0; j < COLUMN; j++) {
 				if (matrix[i][j].getRotate()) {
@@ -116,11 +120,14 @@ public class MatrixActor extends Group {
 				}
 			}
 		}
+		for (ComputerActor it : computers) {
+			if (it.getActive())
+				continue;
+			else return false;
+		}
+		
+		server.setActvieServer();
+		return true;
 	}
 	
-	public void resize() {
-		for (int i = 0; i < ROW; i++)
-			for (int j = 0; j < COLUMN; j++) 
-				matrix[i][j].changeSize();
-	}
 }

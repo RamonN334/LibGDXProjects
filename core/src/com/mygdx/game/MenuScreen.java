@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+// начальный экран с New Game
 public class MenuScreen implements Screen {
 	private ButtonActor button;
 	private Stage stage;
@@ -21,7 +22,7 @@ public class MenuScreen implements Screen {
 	}
 	
 	public MenuScreen() {
-		button = new ButtonActor("data/network/MenuScreen/buttonNewGame.png");
+		button = new ButtonActor("data/network/Buttons/buttonNewGame.png");
 		button.addListener(new GoToGameListener());
 		//button.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		

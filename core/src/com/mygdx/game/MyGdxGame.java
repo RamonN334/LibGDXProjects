@@ -2,11 +2,11 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 
+// Основной класс игры
 public class MyGdxGame extends Game {
+	private final int endLevel = 2;
 	private MenuScreen menuScreen;
-	private GameScreen gameLevelOne;
-	private GameScreen gameLevelTwo;
-	private GameScreen gameLevelThree;
+	private GameScreen [] levels;
 	
 	private static MyGdxGame instance = new MyGdxGame();
 	
@@ -20,15 +20,27 @@ public class MyGdxGame extends Game {
 		setScreen(menuScreen);
 	}
 	
+	public void ShowVictoryScreen(int nextLevel) {
+		setScreen(new VictoryScreen(nextLevel));
+	}
+	
 	public void ShowGame() {
-		setScreen(gameLevelOne);
+		setScreen(levels[0]);
+	}
+	
+	public void nextLevel(int numLevel) {
+		if (numLevel != endLevel)
+			setScreen(levels[numLevel]);
+		else
+			ShowGameMenu();	
 	}
 	
 	@Override
 	public void create() {
 		menuScreen = new MenuScreen();
-		gameLevelOne = new GameScreen("data/network/Levels/LevelOne.txt");
-		gameLevelTwo = new GameScreen("data/network/Levels/LevelTwo.txt");
+		levels = new GameScreen[3];
+		for (int i = 0; i < 2; i++)
+			levels[i] = new GameScreen("data/network/Levels/Level" + (i + 1) +".txt", i);
 		
 
 		ShowGameMenu();
@@ -37,6 +49,8 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose() {
 		menuScreen.dispose();
-		gameLevelOne.dispose();
+		for (GameScreen i : levels)
+			i.dispose();
+
 	}
 }

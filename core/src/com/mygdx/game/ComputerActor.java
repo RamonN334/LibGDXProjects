@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+// Класс для элментов поля
 public class ComputerActor extends Actor {
 	private boolean connect = false;
 	private Sprite sprite;
@@ -22,6 +23,7 @@ public class ComputerActor extends Actor {
 	private boolean right = false;
 	private boolean isRotated = false;
 	
+	// соседи элемента 
 	private ComputerActor CellU;
 	private ComputerActor CellL;
 	private ComputerActor CellD;
@@ -41,6 +43,7 @@ public class ComputerActor extends Actor {
 		};
 	};
 	
+	// получить соседний элемент
 	ComputerActor next(Dir d) {
 		switch (d) {
 		case U___:
@@ -56,6 +59,7 @@ public class ComputerActor extends Actor {
 		}
 	}
 	
+	// получить true если элемент имеет выход в заданном направлении
 	public boolean getSide(Dir d) {
 		switch (d) {
 		case U___:
@@ -71,6 +75,7 @@ public class ComputerActor extends Actor {
 		}
 	}
 	
+	// установить ссылки на соседние элементы
 	public void setNeighbours(ComputerActor u, ComputerActor l, ComputerActor d, ComputerActor r) {
 		CellU = u;
 		CellL = l;
@@ -78,14 +83,17 @@ public class ComputerActor extends Actor {
 		CellR = r;
 	}
 	
+	// сбрасываем состояние того, что элемент повернут
 	public void setRotate() {
 		isRotated = false;
 	}
 	
+	// возвращаем true, если элмент был повернут
 	public boolean getRotate() {
 		return isRotated;
 	}
 	
+	// при поворачивании элемента меняем его выходы
 	private void SwapPointsCollision() {
 		boolean swap = right;
 		right = bottom;
@@ -93,7 +101,8 @@ public class ComputerActor extends Actor {
 		left = top;
 		top = swap;
 	} 
-		
+	
+	// если элемент имеет выход вверх, остальные по аналогии
 	public boolean getU() {
 		return top;
 	}
@@ -107,6 +116,7 @@ public class ComputerActor extends Actor {
 		return right;
 	}
 	
+	// если элемент соединяется с соседним
 	public void setActive(boolean b) {
 		if (connect == b || type.equals("server")) return;
 		else connect = b;
@@ -114,6 +124,7 @@ public class ComputerActor extends Actor {
 			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computerActive.png")));
 	}
 	
+	// если не соединяется
 	public void SetUnActive() {
 		if (!type.equals("server")) {
 			connect = false;
@@ -126,6 +137,7 @@ public class ComputerActor extends Actor {
 		return connect;
 	}
 	
+	// получаем название элемента
 	public String getType() {
 		return type;
 	}
@@ -137,6 +149,12 @@ public class ComputerActor extends Actor {
 	public int y() {
 		return yindex;
 	}
+	
+	// если все компьютеры подключены к серверу, делаем его активным
+	public void setActvieServer() {
+		sprite.setTexture(new Texture(Gdx.files.internal("data/network/serverActive.png")));
+	}
+	
 	
 	public ComputerActor(int iindex, int jindex, float x, float y, String name) {
 		xindex = iindex;
@@ -155,7 +173,7 @@ public class ComputerActor extends Actor {
 		this.setY(y);
 		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
 		sprite.setOriginCenter();
-		if (!name.equals("computer") && !name.equals("server") && !name.equals("cableFour")) {
+		if (!name.equals("computer") && !name.equals("server") && !name.equals("cableFour")) { // если элемент является не сервером и не компьютером, устанавлиаем на него обработки поворота
 			addListener(new InputListener() {
 				@Override
 				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -205,6 +223,7 @@ public class ComputerActor extends Actor {
 		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
 	}
 	
+	// отрисовка элемента
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		batch.draw(sprite, 
