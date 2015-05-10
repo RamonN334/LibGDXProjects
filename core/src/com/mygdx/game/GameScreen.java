@@ -7,6 +7,8 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -45,7 +47,7 @@ public class GameScreen implements Screen {
 					else
 						break;
 					for (int j = 0; j < COLUMN; j++) {						
-						matAct.addActor(i, j, new CellActor(i, j, x, y, retval[j]));
+						matAct.addActor(i, j, new CellActor(i, j, x, y, new TextureRegion(new Texture(namePath), (int)x, (int)y, (int)(x + 64), (int)(y + 64))));
 						x += 64;
 						if (x == COLUMN * 64)
 							x = 0;
@@ -63,7 +65,6 @@ public class GameScreen implements Screen {
 		matAct.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
 		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
-		matAct.Initilize();
 		stage.addActor(matAct);
 	}
 
@@ -85,7 +86,6 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		
-		result = matAct.checkConnections();
 		stage.draw();		
 		
 		if (result) {
