@@ -1,9 +1,5 @@
 package com.mygdx.game;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -18,8 +14,8 @@ public class GameScreen implements Screen {
 	int numLevel;
 	private Stage stage;
 	private Group group;
-	private final int ROW = 7; // количество строк
-	private final int COLUMN = 6; // количество столбцов
+	private final int ROW = 4; // количество строк
+	private final int COLUMN = 4; // количество столбцов
 	private MatrixActor matAct;
 	
 	
@@ -34,36 +30,23 @@ public class GameScreen implements Screen {
 		float x = 0;
 		float y = 0;
 		
-		// заполняем матрицу элементов из txt документа
-		try {
-			BufferedReader reader = new BufferedReader(Gdx.files.internal(namePath).reader());
-			String line;
-			String[] retval;
-			while (true) {
-				for (int i = 0; i < ROW; i++) {
-					line = reader.readLine();
-					if (line != null)
-						retval = line.split(" ");
-					else
-						break;
-					for (int j = 0; j < COLUMN; j++) {						
-						matAct.addActor(i, j, new CellActor(i, j, x, y, new TextureRegion(new Texture(namePath), (int)x, (int)y, (int)(x + 64), (int)(y + 64))));
-						x += 64;
-						if (x == COLUMN * 64)
-							x = 0;
-					}
-					y += 64;
-				}
-				break;
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Texture texture = new Texture(namePath);
 		
-		matAct.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
-		matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
+		// заполняем матрицу элементов из txt документа
+			for (int i = 0; i < ROW; i++) {
+				for (int j = 0; j < COLUMN; j++) {						
+					matAct.addActor(i, j, new CellActor(i, j, x, y, new TextureRegion(texture, (int)x, (int)y, 64, 64)));
+					y += 64;
+					if (y == COLUMN * 64)
+						y = 0;
+				}
+				x += 64;
+			}
+			
+			matAct.addActors();
+		
+		//matAct.setPosition((Gdx.graphics.getWidth() / 2) - (group.getWidth() / 2), (Gdx.graphics.getHeight() / 2) - (group.getHeight() / 2));
+		//matAct.setOrigin(group.getWidth() / 2, group.getHeight() / 2);
 		
 		stage.addActor(matAct);
 	}
@@ -73,12 +56,12 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		// устанавливаем Action для плавного перехода на другой экран
-		stage.addAction(Actions.sequence(Actions.alpha(0),Actions.fadeIn(0.5f),Actions.delay(2),Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                MyGdxGame.getInstance().ShowVictoryScreen(numLevel + 1);
-            }
-        })));
+	//	stage.addAction(Actions.sequence(Actions.alpha(0),Actions.fadeIn(0.5f),Actions.delay(2),Actions.run(new Runnable() {
+    //       @Override
+    //        public void run() {
+    //            MyGdxGame.getInstance().ShowVictoryScreen(numLevel + 1);
+    //        }
+    //    })));
 	}
 
 	@Override
@@ -86,11 +69,8 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		
+		stage.act(delta);
 		stage.draw();		
-		
-		if (result) {
-			stage.act(delta);
-		}
 	}
 
 	@Override

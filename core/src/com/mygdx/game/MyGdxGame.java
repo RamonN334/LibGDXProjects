@@ -40,7 +40,7 @@ public class MyGdxGame extends Game {
 		menuScreen = new MenuScreen();
 		levels = new GameScreen[3];
 		for (int i = 0; i < 2; i++)
-			levels[i] = new GameScreen("data/network/Levels/level" + (i + 1) +".png", i);
+			levels[i] = new GameScreen("data/barley-break/Levels/level" + (i + 1) +".png", i);
 		
 
 		ShowGameMenu();

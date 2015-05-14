@@ -22,7 +22,7 @@ public class MenuScreen implements Screen {
 	}
 	
 	public MenuScreen() {
-		button = new ButtonActor("data/network/Buttons/buttonNewGame.png");
+		button = new ButtonActor("data/barley-break/Buttons/buttonNewGame.png");
 		button.addListener(new GoToGameListener());
 		//button.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		

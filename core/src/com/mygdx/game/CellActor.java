@@ -14,10 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 // Класс для элментов поля
 public class CellActor extends Actor {
-	private boolean connect = false;
 	private Sprite sprite;
 	private int xindex;
 	private int yindex;
+	private int x;
+	private int y;
 	
 	// соседи элемента 
 	private CellActor CellU;
@@ -63,27 +64,6 @@ public class CellActor extends Actor {
 		CellR = r;
 	}
 	
-	// если элемент соединяется с соседним
-	public void setActive(boolean b) {
-		if (connect == b || type.equals("server")) return;
-		else connect = b;
-		if (type.equals("computer"))
-			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computerActive.png")));
-	}
-	
-	// если не соединяется
-	public void SetUnActive() {
-		if (!type.equals("server")) {
-			connect = false;
-		}
-		if (type.equals("computer"))
-			sprite.setTexture(new Texture(Gdx.files.internal("data/network/computer.png")));
-	}
-	
-	public boolean getActive() {
-		return connect;
-	}
-	
 	// получаем название элемента
 	public String getType() {
 		return type;
@@ -96,22 +76,16 @@ public class CellActor extends Actor {
 	public int y() {
 		return yindex;
 	}
-	
-	// если все компьютеры подключены к серверу, делаем его активным
-	public void setActvieServer() {
-		sprite.setTexture(new Texture(Gdx.files.internal("data/network/serverActive.png")));
-	}
-	
-	
+		
 	public CellActor(int iindex, int jindex, float x, float y, TextureRegion image) {
 		xindex = iindex;
 		yindex = jindex;
-		
-		sprite = new Sprite(image);
-	}
-	
-	public void changeSize() {
-		setBounds(this.getX(), this.getY(), sprite.getWidth(), sprite.getHeight());
+		this.setX(x);
+		this.setY(y);
+		sprite = new Sprite(image);	
+		sprite.setX(x);
+		sprite.setY(y);
+		setBounds(this.x, this.y, sprite.getWidth(), sprite.getHeight());
 	}
 	
 	// отрисовка элемента
